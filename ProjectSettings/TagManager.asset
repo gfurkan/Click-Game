@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Dispenser
+  - Trash
+  - Vase
+  - Pen
+  - Board
+  - DoorExit
   layers:
   - Default
   - TransparentFX
