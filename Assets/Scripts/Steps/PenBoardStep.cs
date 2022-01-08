@@ -22,6 +22,8 @@ namespace PenBoard
                 if (playerController.firstChosenObject.Equals("Pen") && playerController.secondChosenObject.Equals("Board"))
                 {
                     transform.GetComponent<MeshRenderer>().material = blackMaterial;
+                    playerController.step = PlayerController.Steps.dispenser;
+                    this.enabled = false;
                 }  
             }
         }

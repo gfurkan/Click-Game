@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="57bb407a-b371-4c5b-a238-a7cef00efd2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/BoardBlackMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/BoardBlackMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Materials/GlassBlueMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Materials/GlassBlueMaterial.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Click-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Click-Game/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interactables.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interactables/InteractableObjects.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Interactables/InteractableObjects.cs.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/PenBoardStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/PenBoardStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -64,6 +62,7 @@
       <workItem from="1641638646279" duration="7975000" />
       <workItem from="1641646710467" duration="90000" />
       <workItem from="1641649519831" duration="4726000" />
+      <workItem from="1641663127295" duration="5373000" />
     </task>
     <servers />
   </component>
