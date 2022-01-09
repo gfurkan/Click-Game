@@ -5,48 +5,66 @@ using DG.Tweening;
 using Player;
 using UnityEngine;
 
-public class GlassDispenseStep : MonoBehaviour
+namespace Step
 {
-    [SerializeField] private Transform glassDispensePosition;
-    [SerializeField] private Material glassBlueMaterial;
-
-    private PlayerController playerController;
-    private GameObject glass;
-    private bool isGlassMoved = false, isGlassFilled = false;
-    private void Start()
+    public class GlassDispenseStep : StepContoller
     {
-        playerController=PlayerController.Instance;
-    }
+        #region Fields
 
-    private void Update()
-    {
-        if (!isGlassMoved)
+        [SerializeField] private Transform glassDispensePosition;
+        [SerializeField] private Material glassBlueMaterial;
+
+        private bool isGlassMoved = false, isGlassFilled = false, isMaterialChanged = false;
+
+        #endregion
+
+        #region Unity Methods
+        
+        private void Update()
         {
-            if (playerController.firstChosenObject.Equals("Glass"))
+            if (!isGlassMoved)
             {
-                glass = GameObject.FindGameObjectWithTag("Glass");
-                glass.transform.DOMove(glassDispensePosition.position, 0.5f);
-                isGlassMoved = true;
+                if (playerController.firstChosenObject.Equals("Glass"))
+                {
+                    MoveGlass();
+                }
+            }
+            if(isGlassMoved && !isGlassFilled)
+            {
+                if (playerController.secondChosenObject.Equals("Dispenser"))
+                {
+                    FillGlass();
+                }
+            }
+
+            if (isGlassFilled && !isMaterialChanged)
+            {
+               StartCoroutine(ChangeStep());
             }
         }
-        if(isGlassMoved && !isGlassFilled)
+        #endregion
+
+        #region Private Methods
+        void MoveGlass()
         {
-            if (playerController.secondChosenObject.Equals("Dispenser"))
-            {
-                FillGlass();
-            }
+            MoveObject(glassObject.transform,glassDispensePosition.position);
+            isGlassMoved = true;
+        }
+        void FillGlass()
+        {
+            ChangeMaterial(glassObject,glassBlueMaterial);
+            isGlassFilled = true;
         }
 
-        if (isGlassFilled)
+        IEnumerator ChangeStep()
         {
+            PlayParticle();
+            isMaterialChanged = true;
+            yield return new WaitForSeconds(1);
             playerController.step = PlayerController.Steps.vase;
+            ChangeStringValues();
             this.enabled = false;
         }
-    }
-
-    void FillGlass()
-    {
-        glass.GetComponent<MeshRenderer>().material = glassBlueMaterial;
-        isGlassFilled = true;
+        #endregion
     }
 }

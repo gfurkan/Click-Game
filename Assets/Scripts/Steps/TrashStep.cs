@@ -5,26 +5,59 @@ using DG.Tweening;
 using Player;
 using UnityEngine;
 
-public class TrashStep : MonoBehaviour
+namespace Step
 {
-    private PlayerController playerController;
-    [SerializeField] private Transform glassTrashPosition,glass;
-    private void Start()
+    public class TrashStep : StepContoller
     {
-        playerController=PlayerController.Instance;
-    }
+        #region Fields
+        
+        [SerializeField] private Transform glassTrashPosition;
+        private bool isObjectMoved = false;
+        #endregion
 
-    private void Update()
-    {
-        if (playerController.chosenObject.tag.Equals("Trash"))
+        #region Unity Methods
+
+        private void Update()
         {
-            glass.DOMove(glassTrashPosition.position, 0.5f).OnComplete(GoToDoor);
+            if (!isObjectMoved)
+            {
+                if (playerController.firstChosenObject.Equals("Trash") || playerController.secondChosenObject.Equals("Trash"))
+                {
+                    MoveObject(glassObject.transform,glassTrashPosition.position);
+                    isObjectMoved = true;
+                }
+            }
         }
-    }
 
-    void GoToDoor()
-    {
-        playerController.step = PlayerController.Steps.door;
-        this.enabled = false;
+        #endregion
+
+        #region Private Methods
+
+        void GoToDoor()
+        {
+            StartCoroutine(ChangeStep());
+        }
+
+        private IEnumerator ChangeStep()
+        {
+            PlayParticle();
+            yield return new WaitForSeconds(1);
+            playerController.step = PlayerController.Steps.door;
+            ChangeStringValues();
+            this.enabled = false;
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public override void MoveObject(Transform obj, Vector3 position)
+        {
+            //base.MoveObject(obj, position);
+            obj.DOMove(position, 0.5f).OnComplete(GoToDoor);
+        }
+
+        #endregion
+
     }
 }

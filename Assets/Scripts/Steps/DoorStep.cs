@@ -5,28 +5,51 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DoorStep : MonoBehaviour,IPointerClickHandler
+namespace Step
 {
-    private bool enableFinishingLevel = false;
-    private void Start()
+    public class DoorStep : MonoBehaviour,IPointerClickHandler
     {
-        StartCoroutine(FadeImage());
-    }
+        #region Fields
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("works");
-        if (enableFinishingLevel)
+        [SerializeField] private ParticleSystem[] endGameParticles;
+        private bool enableFinishingLevel = false;
+
+        #endregion
+
+        #region Unity Methods
+
+        private void Start()
         {
-            Debug.Log("Level Finished");
+            StartCoroutine(FadeImage());
         }
         
-    }
+        #endregion
 
-    IEnumerator FadeImage()
-    {
-        yield return new WaitForSeconds(2);
-        transform.GetComponent<CanvasGroup>().DOFade(1, 0.5f).OnComplete(() => enableFinishingLevel=true);
+        #region Private Methods
+
+        IEnumerator FadeImage()
+        {
+            yield return new WaitForSeconds(2);
+            transform.GetComponent<CanvasGroup>().DOFade(1, 0.5f).OnComplete(() => enableFinishingLevel=true);
         
+        }
+
+        #endregion
+
+        #region Public Methods
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if (enableFinishingLevel)
+            {
+                for (int i = 0; i < endGameParticles.Length; i++)
+                {
+                    endGameParticles[i].Play();
+                }
+                Debug.Log("Level Finished");
+            }
+        }
+
+        #endregion
     }
 }

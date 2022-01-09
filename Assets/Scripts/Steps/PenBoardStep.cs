@@ -4,29 +4,57 @@ using System.Collections.Generic;
 using Player;
 using UnityEngine;
 
-namespace PenBoard
+namespace Step
 {
-    public class PenBoardStep : MonoBehaviour
+    public class PenBoardStep : StepContoller
     {
-        private PlayerController playerController;
+        #region Fields
+
         [SerializeField] private Material blackMaterial;
-        private void Start()
-        {
-            playerController=PlayerController.Instance;
-        }
+        private bool isValuesMatched = false;
+        
+        #endregion
+
+        #region Unity Methods
 
         private void Update()
         {
-            if (playerController.compareObject)
+            if (!isValuesMatched)
             {
-                if (playerController.firstChosenObject.Equals("Pen") && playerController.secondChosenObject.Equals("Board"))
-                {
-                    transform.GetComponent<MeshRenderer>().material = blackMaterial;
-                    playerController.step = PlayerController.Steps.dispenser;
-                    this.enabled = false;
-                }  
+                CompareObjects();
             }
+            
         }
+
+        #endregion
+
+        #region Private Methods
+
+        void CompareObjects()
+        {
+            if (playerController.firstChosenObject.Equals("Pen") && playerController.secondChosenObject.Equals("Board"))
+            {
+                StartCoroutine(ChageStep());
+                isValuesMatched = true;
+                
+            }   
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        IEnumerator ChageStep()
+        {
+            ChangeMaterial(transform.gameObject,blackMaterial);
+            PlayParticle();
+            yield return new WaitForSeconds(1);
+            playerController.step = PlayerController.Steps.dispenser;
+            ChangeStringValues();
+            this.enabled = false;
+        }
+
+        #endregion
     } 
 }
 

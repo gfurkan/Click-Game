@@ -3,32 +3,85 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using Player;
+using Step;
 using UnityEngine;
 
-public class VaseStep : MonoBehaviour
+namespace Step
 {
-    private PlayerController playerController;
-    [SerializeField] private Material glassWhiteMaterial;
-    [SerializeField] private Transform glassVasePosition;
-    private GameObject glass;
-    private void Start()
+    public class VaseStep : StepContoller
     {
-        playerController=PlayerController.Instance;
-    }
+        #region Fields
 
-    private void Update()
-    {
-        if (playerController.chosenObject.tag.Equals("Glass"))
+        [SerializeField] private Material glassWhiteMaterial;
+        [SerializeField] private Transform glassVasePosition;
+
+        private bool isGlassMoved = false,isVaseWatered=false;
+        
+        #endregion
+
+        #region Unity Methods
+
+        private void Update()
         {
-            glass = playerController.chosenObject;
-            playerController.chosenObject.transform.DOMove(glassVasePosition.position, 0.5f);
+            if (!isGlassMoved)
+            {
+                if (playerController.firstChosenObject.Equals("Glass"))
+                {
+                    MoveGlass();
+                }
+            }
+            
+            if (isGlassMoved && !isVaseWatered)
+            {
+                if (playerController.secondChosenObject.Equals("Vase"))
+                {
+                    StartCoroutine(WaterVase());
+                }
+            }
+
         }
 
-        if (playerController.chosenObject.tag.Equals("Vase"))
+        #endregion
+
+        #region Private Methods
+
+        void MoveGlass()
         {
-            glass.GetComponent<MeshRenderer>().material = glassWhiteMaterial;
+            MoveObject(glassObject.transform,glassVasePosition.position);
+            isGlassMoved = true;
+        }
+
+        IEnumerator WaterVase()
+        {
+            
+            isVaseWatered = true;
+            glassObject.transform.DORotate(new Vector3(0, 180, 50), 0.5f);
+            yield return new WaitForSeconds(1);
+            PlayParticle();
+            yield return new WaitForSeconds(1);
+            glassObject.transform.DORotate(new Vector3(0, 180, 0), 0.5f);
+            yield return new WaitForSeconds(0.5f);
+            StartCoroutine(ChangeStep());
+        }
+
+         IEnumerator ChangeStep()
+        {
+            ChangeMaterial(glassObject,glassWhiteMaterial);
+            yield return new WaitForSeconds(1);
             playerController.step = PlayerController.Steps.trash;
+            ChangeStringValues();
             this.enabled = false;
         }
+        #endregion
+
+        #region Public Methods
+
+        public override void PlayParticle()
+        {
+            base.PlayParticle();
+        }
+
+        #endregion
     }
 }
+

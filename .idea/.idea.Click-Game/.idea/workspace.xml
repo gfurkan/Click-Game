@@ -5,8 +5,12 @@
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Click-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Click-Game/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/DoorStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/DoorStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/GlassDispenseStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/GlassDispenseStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/PenBoardStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/PenBoardStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/TrashStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/TrashStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/VaseStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/VaseStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,6 +67,8 @@
       <workItem from="1641646710467" duration="90000" />
       <workItem from="1641649519831" duration="4726000" />
       <workItem from="1641663127295" duration="5373000" />
+      <workItem from="1641730326438" duration="5519000" />
+      <workItem from="1641747074437" duration="4300000" />
     </task>
     <servers />
   </component>
