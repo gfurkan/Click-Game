@@ -12,27 +12,33 @@ namespace Step
         #region Fields
         
         [SerializeField] private Transform glassTrashPosition;
-        private bool isObjectMoved = false;
+        
         #endregion
 
         #region Unity Methods
-
-        private void Update()
+        private void OnDisable()
         {
-            if (!isObjectMoved)
-            {
-                if (playerController.firstChosenObject.Equals("Trash") || playerController.secondChosenObject.Equals("Trash"))
-                {
-                    MoveObject(glassObject.transform,glassTrashPosition.position);
-                    isObjectMoved = true;
-                }
-            }
+            PlayerController.OnClickedEvent -= CompareObjectTags;
         }
 
+        private void OnEnable()
+        {
+            PlayerController.OnClickedEvent += CompareObjectTags;
+            ShowTutorial(0);
+        }
+        
         #endregion
 
         #region Private Methods
-
+        private void CompareObjectTags()
+        {
+            if (playerController.chosenObject.Equals("Trash"))
+            {
+                MoveObject(glassObject.transform,glassTrashPosition.position);
+                HideTutorial(0);
+            }
+            
+        }
         void GoToDoor()
         {
             StartCoroutine(ChangeStep());
@@ -41,10 +47,10 @@ namespace Step
         private IEnumerator ChangeStep()
         {
             PlayParticle();
+            
             yield return new WaitForSeconds(1);
-            playerController.step = PlayerController.Steps.door;
-            ChangeStringValues();
-            this.enabled = false;
+            stepChangeController.ControlSteps(StepChangeController.Steps.door);
+            DisableScript();
         }
 
         #endregion

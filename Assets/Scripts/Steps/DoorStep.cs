@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Step
 {
@@ -12,15 +14,24 @@ namespace Step
         #region Fields
 
         [SerializeField] private ParticleSystem[] endGameParticles;
+        [SerializeField] private Button replayButton;
+        [SerializeField] private Image completedText;
+        [SerializeField] private Transform completedTextPosition,replayButtonPosition,door;
+        
         private bool enableFinishingLevel = false;
+        private float fadeSpeed = 0.25f,doorSpeed=0.75f;
 
+        private CanvasGroup doorImage;
+        
         #endregion
 
         #region Unity Methods
 
         private void Start()
         {
+            doorImage = transform.GetComponent<CanvasGroup>();
             StartCoroutine(FadeImage());
+            replayButton.onClick.AddListener(LoadScene);
         }
         
         #endregion
@@ -30,10 +41,13 @@ namespace Step
         IEnumerator FadeImage()
         {
             yield return new WaitForSeconds(2);
-            transform.GetComponent<CanvasGroup>().DOFade(1, 0.5f).OnComplete(() => enableFinishingLevel=true);
-        
+            doorImage.DOFade(1, fadeSpeed).OnComplete(() => enableFinishingLevel=true);
         }
-
+        private void LoadScene()
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        
         #endregion
 
         #region Public Methods
@@ -46,10 +60,14 @@ namespace Step
                 {
                     endGameParticles[i].Play();
                 }
-                Debug.Log("Level Finished");
+
+                completedText.transform.DOMove(completedTextPosition.position, fadeSpeed).SetEase(Ease.OutBack);
+                replayButton.transform.DOMove(replayButtonPosition.position, fadeSpeed).SetEase(Ease.OutBack);
+
+                door.DORotate(new Vector3(0, -50, 0), doorSpeed);
+                doorImage.DOFade(0, fadeSpeed);
             }
         }
-
         #endregion
     }
 }

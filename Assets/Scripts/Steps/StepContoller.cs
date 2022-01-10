@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 using Player;
-
+using UnityEngine.UI;
 namespace Step
 {
     public class StepContoller : MonoBehaviour
@@ -12,39 +12,66 @@ namespace Step
         #region Fields
 
         [SerializeField] private ParticleSystem particle;
+        [SerializeField] private CanvasGroup[] tutorials;
+        private CanvasGroup glassTutorial;
+        
         protected GameObject glassObject;
         protected PlayerController playerController;
-
+        protected StepChangeController stepChangeController;
+        
+        private float showTutorialTime = 0.25f, hideTutorialTime = 0.25f;
+        
         #endregion
 
         #region Unity Methods
 
-        private void Start()
+        private void Awake()
         {
             playerController=PlayerController.Instance;
+            stepChangeController=StepChangeController.Instance;
+            
             glassObject = GameObject.FindGameObjectWithTag("Glass");
+            glassTutorial = glassObject.transform.GetChild(0).transform.GetChild(0).GetComponent<CanvasGroup>();
         }
 
         #endregion
         
         #region Public Methods
 
-        public virtual void ChangeMaterial(GameObject obj,Material mat)
+        #region Tutorial Methods
+
+        public void ShowGlassTutorial()
         {
-            obj.GetComponent<MeshRenderer>().material = mat;
+            glassTutorial.DOFade(1, showTutorialTime);
+        }
+        public void HideGlassTutorial()
+        {
+            glassTutorial.DOFade(0, hideTutorialTime);
+        }
+        public void ShowTutorial(int tutorialIndex)
+        {
+            tutorials[tutorialIndex].DOFade(1, showTutorialTime);
+        }
+        public void HideTutorial(int tutorialIndex)
+        {
+            tutorials[tutorialIndex].DOFade(0, hideTutorialTime);
         }
 
+        #endregion
         public virtual void MoveObject(Transform obj, Vector3 position)
         {
             obj.DOMove(position, 0.5f);
         }
-
-        public virtual void ChangeStringValues()
+        public void ChangeMaterial(GameObject obj,Material mat)
         {
-            playerController.ChangeStringValues();
+            obj.GetComponent<MeshRenderer>().material = mat;
         }
-
-        public virtual void PlayParticle()
+        public void DisableScript()
+        {
+            playerController.chosenObject = " ";
+            this.enabled = false;
+        }
+        public void PlayParticle()
         {
             particle.Play();
         }

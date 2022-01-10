@@ -19,32 +19,45 @@ namespace Step
         #endregion
 
         #region Unity Methods
-        
-        private void Update()
+
+        private void OnDisable()
+        {
+            PlayerController.OnClickedEvent -= CompareObjectTags;
+        }
+
+        private void OnEnable()
+        {
+            PlayerController.OnClickedEvent += CompareObjectTags;
+            ShowGlassTutorial();
+        }
+        #endregion
+
+        #region Private Methods
+        private void CompareObjectTags()
         {
             if (!isGlassMoved)
             {
-                if (playerController.firstChosenObject.Equals("Glass"))
+                if (playerController.chosenObject.Equals("Glass"))
                 {
                     MoveGlass();
+                    HideGlassTutorial();
+                    ShowTutorial(0);
                 }
             }
             if(isGlassMoved && !isGlassFilled)
             {
-                if (playerController.secondChosenObject.Equals("Dispenser"))
+                if (playerController.chosenObject.Equals("Dispenser"))
                 {
                     FillGlass();
+                    HideTutorial(0);
                 }
             }
 
             if (isGlassFilled && !isMaterialChanged)
             {
-               StartCoroutine(ChangeStep());
+                StartCoroutine(ChangeStep());
             }
         }
-        #endregion
-
-        #region Private Methods
         void MoveGlass()
         {
             MoveObject(glassObject.transform,glassDispensePosition.position);
@@ -60,11 +73,11 @@ namespace Step
         {
             PlayParticle();
             isMaterialChanged = true;
-            yield return new WaitForSeconds(1);
-            playerController.step = PlayerController.Steps.vase;
-            ChangeStringValues();
-            this.enabled = false;
+            yield return new WaitForSeconds(0.5f);
+            stepChangeController.ControlSteps(StepChangeController.Steps.vase);
+            DisableScript();
         }
+        
         #endregion
     }
 }

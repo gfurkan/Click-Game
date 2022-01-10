@@ -3,19 +3,23 @@
   <component name="ChangeListManager">
     <list default="true" id="57bb407a-b371-4c5b-a238-a7cef00efd2c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Click-Game/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Click-Game/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Mini Toon Office/Scenes/Toon Office sample Scene.unity.meta" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Player/PlayerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/DoorStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/DoorStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/GlassDispenseStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/GlassDispenseStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/PenBoardStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/PenBoardStep.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/StepContoller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/StepContoller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/TrashStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/TrashStep.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Steps/VaseStep.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Steps/VaseStep.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/../Wood-Bender-main/Assets/Scripts/_UI/_panels/EndPanel.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -68,7 +72,15 @@
       <workItem from="1641649519831" duration="4726000" />
       <workItem from="1641663127295" duration="5373000" />
       <workItem from="1641730326438" duration="5519000" />
-      <workItem from="1641747074437" duration="4300000" />
+      <workItem from="1641747074437" duration="8582000" />
+      <workItem from="1641756969368" duration="1722000" />
+      <workItem from="1641796185711" duration="2483000" />
+      <workItem from="1641801162511" duration="1984000" />
+      <workItem from="1641812669109" duration="2119000" />
+      <workItem from="1641823357390" duration="1182000" />
+      <workItem from="1641824569755" duration="49000" />
+      <workItem from="1641833258326" duration="2444000" />
+      <workItem from="1641836520042" duration="82000" />
     </task>
     <servers />
   </component>

@@ -11,47 +11,67 @@ namespace Step
         #region Fields
 
         [SerializeField] private Material blackMaterial;
-        private bool isValuesMatched = false;
+        
+        private bool isPenChosed=false,isBboardChosed=false;
         
         #endregion
 
         #region Unity Methods
 
-        private void Update()
+        private void OnDisable()
         {
-            if (!isValuesMatched)
+            PlayerController.OnClickedEvent -= CompareObjectTags;
+        }
+
+        private void OnEnable()
+        {
+            PlayerController.OnClickedEvent += CompareObjectTags;
+            ShowTutorial(0);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        void CompareObjectTags()
+        {
+            if (playerController.chosenObject.Equals("Pen"))
             {
-                CompareObjects();
+                isPenChosed = true;
+                HideTutorial(0);
+                ShowTutorial(1);
             }
-            
-        }
 
-        #endregion
-
-        #region Private Methods
-
-        void CompareObjects()
-        {
-            if (playerController.firstChosenObject.Equals("Pen") && playerController.secondChosenObject.Equals("Board"))
+            if (isPenChosed)
             {
-                StartCoroutine(ChageStep());
-                isValuesMatched = true;
-                
-            }   
+                if (playerController.chosenObject.Equals("Board"))
+                {
+                    isBboardChosed = true;
+                    HideTutorial(1);
+                }
+            }
+
+            if (isBboardChosed)
+            {
+                ChangeGlassMaterial();
+            }
         }
 
-        #endregion
-
-        #region Private Methods
-
-        IEnumerator ChageStep()
+        void ChangeGlassMaterial()
         {
             ChangeMaterial(transform.gameObject,blackMaterial);
             PlayParticle();
+            StartCoroutine(ChangeStep());
+
+            isPenChosed = false;
+            isBboardChosed = false;
+        }
+        IEnumerator ChangeStep()
+        {
+
             yield return new WaitForSeconds(1);
-            playerController.step = PlayerController.Steps.dispenser;
-            ChangeStringValues();
-            this.enabled = false;
+            stepChangeController.ControlSteps(StepChangeController.Steps.dispenser);
+            DisableScript();
         }
 
         #endregion

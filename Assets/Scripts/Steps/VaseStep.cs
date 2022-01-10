@@ -20,31 +20,43 @@ namespace Step
         #endregion
 
         #region Unity Methods
+        private void OnDisable()
+        {
+            PlayerController.OnClickedEvent -= CompareObjectTags;
+        }
 
-        private void Update()
+        private void OnEnable()
+        {
+            PlayerController.OnClickedEvent += CompareObjectTags;
+            ShowGlassTutorial();
+        }
+        
+        #endregion
+
+        #region Private Methods
+        
+        private void CompareObjectTags()
         {
             if (!isGlassMoved)
             {
-                if (playerController.firstChosenObject.Equals("Glass"))
+                if (playerController.chosenObject.Equals("Glass"))
                 {
                     MoveGlass();
+                    HideGlassTutorial();
+                    ShowTutorial(0);
                 }
             }
             
             if (isGlassMoved && !isVaseWatered)
             {
-                if (playerController.secondChosenObject.Equals("Vase"))
+                if (playerController.chosenObject.Equals("Vase"))
                 {
                     StartCoroutine(WaterVase());
+                    HideTutorial(0);
                 }
             }
 
         }
-
-        #endregion
-
-        #region Private Methods
-
         void MoveGlass()
         {
             MoveObject(glassObject.transform,glassVasePosition.position);
@@ -68,19 +80,9 @@ namespace Step
         {
             ChangeMaterial(glassObject,glassWhiteMaterial);
             yield return new WaitForSeconds(1);
-            playerController.step = PlayerController.Steps.trash;
-            ChangeStringValues();
-            this.enabled = false;
+            stepChangeController.ControlSteps(StepChangeController.Steps.trash);
+            DisableScript();
         }
-        #endregion
-
-        #region Public Methods
-
-        public override void PlayParticle()
-        {
-            base.PlayParticle();
-        }
-
         #endregion
     }
 }
